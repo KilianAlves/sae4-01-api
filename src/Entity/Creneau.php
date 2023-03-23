@@ -7,6 +7,7 @@ use App\Repository\CreneauRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CreneauRepository::class)]
+#[ApiResource]
 class Creneau
 {
     #[ORM\Id]
