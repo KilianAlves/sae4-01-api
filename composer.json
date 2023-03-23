@@ -68,6 +68,16 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "test:cs": [
+            "php-cs-fixer fix --dry-run"
+        ],
+        "fix:cs ": [
+            "php-cs-fixer fix"
+        ],
+        "start": [
+            "Composer\\Config::disableProcessTimeout",
+            "symfony serve"
         ]
     },
     "conflict": {
