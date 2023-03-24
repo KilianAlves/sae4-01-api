@@ -5,12 +5,12 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\DiscriminatorColumn;
+use Doctrine\ORM\Mapping\DiscriminatorMap;
+use Doctrine\ORM\Mapping\InheritanceType;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Doctrine\ORM\Mapping\DiscriminatorMap;
-use Doctrine\ORM\Mapping\InheritanceType;
-use Doctrine\ORM\Mapping\DiscriminatorColumn;
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
 #[ORM\Table(name: '`utilisateur`')]
@@ -101,14 +101,13 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
      * Get role according to real User class.
      * Examples:
      *  - App\Entity\Customer -> ROLE_CUSTOMER
-     *  - App\Entity\Employee -> ROLE_EMPLOYEE
-     *
-     * @return string
+     *  - App\Entity\Employee -> ROLE_EMPLOYEE.
      */
     protected function getRole(): string
     {
         $explodedClassname = explode('\\', static::class);
         $className = mb_strtoupper(array_pop($explodedClassname));
+
         return "ROLE_$className";
     }
 
