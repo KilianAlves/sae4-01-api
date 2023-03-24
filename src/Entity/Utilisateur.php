@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
 use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -17,7 +18,7 @@ use Doctrine\ORM\Mapping\DiscriminatorColumn;
 #[DiscriminatorColumn(name: 'discriminator', type: 'string')]
 #[DiscriminatorMap(['client' => Client::class, 'veterinaire' => Veterinaire::class])]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
-
+#[ApiResource]
 class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
