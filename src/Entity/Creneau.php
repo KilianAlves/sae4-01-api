@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\CreaneauRepository;
+use ApiPlatform\Metadata\ApiResource;
+use App\Repository\CreneauRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CreaneauRepository::class)]
-class Creaneau
+#[ORM\Entity(repositoryClass: CreneauRepository::class)]
+#[ApiResource]
+class Creneau
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

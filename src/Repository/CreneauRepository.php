@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Creaneau;
+use App\Entity\Creneau;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Creaneau>
+ * @extends ServiceEntityRepository<Creneau>
  *
- * @method Creaneau|null find($id, $lockMode = null, $lockVersion = null)
- * @method Creaneau|null findOneBy(array $criteria, array $orderBy = null)
- * @method Creaneau[]    findAll()
- * @method Creaneau[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Creneau|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Creneau|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Creneau[]    findAll()
+ * @method Creneau[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CreaneauRepository extends ServiceEntityRepository
+class CreneauRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Creaneau::class);
+        parent::__construct($registry, Creneau::class);
     }
 
-    public function save(Creaneau $entity, bool $flush = false): void
+    public function save(Creneau $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class CreaneauRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Creaneau $entity, bool $flush = false): void
+    public function remove(Creneau $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class CreaneauRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Creaneau[] Returns an array of Creaneau objects
+//     * @return Creneau[] Returns an array of Creneau objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class CreaneauRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Creaneau
+//    public function findOneBySomeField($value): ?Creneau
 //    {
 //        return $this->createQueryBuilder('c')
 //            ->andWhere('c.exampleField = :val')
