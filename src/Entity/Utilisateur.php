@@ -73,7 +73,11 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Assert\Email]
     #[Groups(['get_Me', 'set_User'])]
+    #[Assert\Regex(
+        pattern: '/[<>&"]/',
+        match: false)]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -88,10 +92,16 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 50)]
     #[Groups(['get_User', 'set_User'])]
+    #[Assert\Regex(
+        pattern: '/[<>&"]/',
+        match: false)]
     private ?string $nom = null;
 
     #[ORM\Column(length: 50)]
     #[Groups(['get_User', 'set_User'])]
+    #[Assert\Regex(
+        pattern: '/[<>&"]/',
+        match: false)]
     private ?string $prenom = null;
 
     #[ORM\Column(length: 50)]
