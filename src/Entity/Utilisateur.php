@@ -34,6 +34,11 @@ use Symfony\Component\Validator\Constraints as Assert;
             denormalizationContext: ['groups' => ['set_User']],
             security: "is_granted('ROLE_USER') and object == user",
         ),
+        new Patch(
+            normalizationContext: ['groups' => ['get_Me', 'get_User']],
+            denormalizationContext: ['groups' => ['set_User']],
+            security: "is_granted('ROLE_USER') and object == user",
+        ),
     ],
     normalizationContext: ['groups' => ['get_User']]
 )]
