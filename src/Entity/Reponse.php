@@ -3,12 +3,25 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
 use App\Repository\ReponseRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ReponseRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    operations: [
+        new GetCollection(),
+        new Get(
+            normalizationContext: ['groups' => ['get_Reponse']]
+        ),
+        new Post(
+            security: "is_granted('ROLE_USER') and object == user"
+        ),
+    ]
+)]
 class Reponse
 {
     #[ORM\Id]
