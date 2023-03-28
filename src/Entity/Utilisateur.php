@@ -3,6 +3,12 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Put;
+use App\Controller\GetMeController;
 use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\DiscriminatorColumn;
@@ -11,6 +17,8 @@ use Doctrine\ORM\Mapping\InheritanceType;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
 #[ORM\Table(name: '`utilisateur`')]
@@ -18,12 +26,18 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[DiscriminatorColumn(name: 'discriminator', type: 'string')]
 #[DiscriminatorMap(['client' => Client::class, 'veterinaire' => Veterinaire::class])]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
-#[ApiResource]
+#[ApiResource(
+    operations: [
+        new Get(),
+    ],
+    normalizationContext: ['groups' => ['get_User']]
+)]
 class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['get_User'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
@@ -39,27 +53,35 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 50)]
+    #[Groups(['get_User'])]
     private ?string $nom = null;
 
     #[ORM\Column(length: 50)]
+    #[Groups(['get_User'])]
     private ?string $prenom = null;
 
     #[ORM\Column(length: 50)]
+    #[Groups(['get_User'])]
     private ?string $tel = null;
 
     #[ORM\Column(length: 50)]
+    #[Groups(['get_User'])]
     private ?string $CP = null;
 
     #[ORM\Column(length: 50)]
+    #[Groups(['get_User'])]
     private ?string $ville = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['get_User'])]
     private ?string $adresse = null;
 
     #[ORM\Column(length: 50)]
+    #[Groups(['get_User'])]
     private ?string $complementAdresse = null;
 
     #[ORM\Column(length: 50)]
+    #[Groups(['get_User'])]
     private ?string $civilite = null;
 
     public function getId(): ?int
