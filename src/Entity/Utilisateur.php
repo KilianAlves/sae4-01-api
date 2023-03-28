@@ -32,6 +32,22 @@ use Symfony\Component\Validator\Constraints as Assert;
         new GetCollection(
             normalizationContext: ['groups' => ['get_Me', 'get_User']],
             security: "is_granted('ROLE_ADMIN')"),
+        new GetCollection(
+            uriTemplate: '/me',
+            controller: GetMeController::class,
+            openapiContext: ['summary' => 'Retrouve les informations du compte connecté',
+                'responses' => [
+                    '200' => [
+                        'description' => 'Les informations ont bien été transmises',
+                    ],
+                    '401' => [
+                        'description' => 'Utilisateur non connecté',
+                    ],
+                ]],
+            paginationEnabled: false,
+            normalizationContext: ['groups' => ['get_Me', 'get_User']],
+            security: "is_granted('ROLE_USER')"
+        ),
         new Put(
             normalizationContext: ['groups' => ['get_Me', 'get_User']],
             denormalizationContext: ['groups' => ['set_User']],
