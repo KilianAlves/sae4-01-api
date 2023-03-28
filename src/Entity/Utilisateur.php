@@ -29,6 +29,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiResource(
     operations: [
         new Get(),
+        new Put(
+            normalizationContext: ['groups' => ['get_Me', 'get_User']],
+            denormalizationContext: ['groups' => ['set_User']],
+            security: "is_granted('ROLE_USER') and object == user",
+        ),
     ],
     normalizationContext: ['groups' => ['get_User']]
 )]
@@ -41,6 +46,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Groups(['get_Me', 'set_User'])]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -50,34 +56,35 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Groups(['set_User'])]
     private ?string $password = null;
 
     #[ORM\Column(length: 50)]
-    #[Groups(['get_User'])]
+    #[Groups(['get_User', 'set_User'])]
     private ?string $nom = null;
 
     #[ORM\Column(length: 50)]
-    #[Groups(['get_User'])]
+    #[Groups(['get_User', 'set_User'])]
     private ?string $prenom = null;
 
     #[ORM\Column(length: 50)]
-    #[Groups(['get_User'])]
+    #[Groups(['get_User', 'set_User'])]
     private ?string $tel = null;
 
     #[ORM\Column(length: 50)]
-    #[Groups(['get_User'])]
+    #[Groups(['get_User', 'set_User'])]
     private ?string $CP = null;
 
     #[ORM\Column(length: 50)]
-    #[Groups(['get_User'])]
+    #[Groups(['get_User', 'set_User'])]
     private ?string $ville = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['get_User'])]
+    #[Groups(['get_User', 'set_User'])]
     private ?string $adresse = null;
 
     #[ORM\Column(length: 50)]
-    #[Groups(['get_User'])]
+    #[Groups(['get_User', 'set_User'])]
     private ?string $complementAdresse = null;
 
     #[ORM\Column(length: 50)]
