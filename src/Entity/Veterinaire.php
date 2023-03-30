@@ -9,10 +9,12 @@ use App\Repository\VeterianireRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: VeterianireRepository::class)]
 #[ApiResource(
     operations: [
+        new Get(),
         new Post(
             security: "is_granted('ROLE_ADMIN')",
         ),
@@ -22,6 +24,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Veterinaire extends Utilisateur
 {
     #[ORM\OneToMany(mappedBy: 'veterinaire', targetEntity: rendez_vous::class)]
+    #[Groups(['get_Me', 'set_User'])]
     private Collection $rendezVous;
 
     public function __construct()
