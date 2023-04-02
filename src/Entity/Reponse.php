@@ -40,6 +40,7 @@ class Reponse
     private ?Utilisateur $utilisateur = null;
 
     #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Question $question = null;
 
     public function getId(): ?int
