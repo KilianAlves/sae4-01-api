@@ -50,7 +50,6 @@ final class QuestionFactory extends ModelFactory
             'dateEcriture' => self::faker()->dateTime(),
             'description' => self::faker()->text(255),
             'titre' => self::faker()->text(255),
-            'utilisateur' => null, // TODO add App\Entity\Utilisateur type manually
         ];
     }
 
