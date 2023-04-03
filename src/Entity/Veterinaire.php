@@ -16,6 +16,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
     operations: [
         new Get(),
         new Post(
+            normalizationContext: ['groups' => ['get_Me', 'get_User']],
+            denormalizationContext: ['groups' => ['set_User']],
             security: "is_granted('ROLE_VETERINAIRE')",
         ),
     ],
@@ -24,7 +26,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class Veterinaire extends Utilisateur
 {
     #[ORM\OneToMany(mappedBy: 'veterinaire', targetEntity: rendez_vous::class)]
-    #[Groups(['get_Me', 'set_User'])]
     private Collection $rendezVous;
 
     public function __construct()
