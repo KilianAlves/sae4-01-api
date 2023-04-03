@@ -16,7 +16,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
     operations: [
         new Get(),
         new Post(
-            security: "is_granted('ROLE_ADMIN')",
+            security: "is_granted('ROLE_VETERINAIRE')",
         ),
     ],
     normalizationContext: ['groups' => ['get_User']]

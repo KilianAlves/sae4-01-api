@@ -31,7 +31,7 @@ use Symfony\Component\Validator\Constraints as Assert;
         new Get(),
         new GetCollection(
             normalizationContext: ['groups' => ['get_Me', 'get_User']],
-            security: "is_granted('ROLE_ADMIN')"),
+            security: "is_granted('ROLE_VETERINAIRE')"),
         new GetCollection(
             uriTemplate: '/me',
             controller: GetMeController::class,
@@ -59,7 +59,7 @@ use Symfony\Component\Validator\Constraints as Assert;
             security: "is_granted('ROLE_USER') and object == user",
         ),
         new Delete(
-            security: "is_granted('ROLE_ADMIN') or object == user"
+            security: "is_granted('ROLE_VETERINAIRE') or object == user"
         ),
     ],
     normalizationContext: ['groups' => ['get_User']]
