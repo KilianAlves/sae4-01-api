@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use App\Repository\ClientRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -16,6 +17,11 @@ use Doctrine\ORM\Mapping as ORM;
         new Get(),
         new Post(
             security: "is_granted('ROLE_USER')",
+        ),
+        new Patch(
+            normalizationContext: ['groups' => ['get_Me', 'get_User']],
+            denormalizationContext: ['groups' => ['set_User']],
+            security: "is_granted('ROLE_USER') and object == user",
         ),
     ],
     normalizationContext: ['groups' => ['get_User']]
