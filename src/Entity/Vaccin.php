@@ -19,6 +19,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: VaccinRepository::class)]
 #[ApiResource(operations: [
     new Get(),
+    new GetCollection(
+        normalizationContext: ['groups' => ['get_Vac']], ),
+    new Delete(),
 ],
     normalizationContext: ['groups' => ['get_Vac']],
     order: ['dateRappel' => 'ASC'],
