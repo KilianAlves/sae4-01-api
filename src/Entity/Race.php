@@ -3,19 +3,29 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use App\Repository\RaceRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: RaceRepository::class)]
-#[ApiResource]
+#[ApiResource(operations: [
+    new Get(),
+    new GetCollection(
+        normalizationContext: ['groups' => ['get_Race']], ),
+],
+    normalizationContext: ['groups' => ['get_Race']], )]
 class Race
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['get_Race'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[Groups(['get_Race'])]
     private ?string $libelle = null;
 
     public function getId(): ?int
