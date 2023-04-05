@@ -3,13 +3,38 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
 use App\Repository\ClientRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ClientRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    operations: [
+        new Get(),
+        new Post(
+            normalizationContext: ['groups' => ['get_Me', 'get_User']],
+            denormalizationContext: ['groups' => ['set_User']],
+            security: "is_granted('ROLE_USER')",
+        ),
+        new Patch(
+            normalizationContext: ['groups' => ['get_Me', 'get_User']],
+            denormalizationContext: ['groups' => ['set_User']],
+            security: "is_granted('ROLE_USER') and object == user",
+        ),
+        new Put(
+            normalizationContext: ['groups' => ['get_Me', 'get_User']],
+            denormalizationContext: ['groups' => ['set_User']],
+            security: "is_granted('ROLE_USER') and object == user",
+        ),
+    ],
+    normalizationContext: ['groups' => ['get_User']]
+)]
 class Client extends Utilisateur
 {
     /*
@@ -20,9 +45,11 @@ class Client extends Utilisateur
     */
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['get_User', 'set_User'])]
     private ?float $solde = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['get_User', 'set_User'])]
     private ?string $commentaire = null;
 
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: rendez_vous::class)]
