@@ -9,6 +9,7 @@ use ApiPlatform\Metadata\Post;
 use App\Repository\ReponseRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ReponseRepository::class)]
 #[ApiResource(
@@ -27,12 +28,15 @@ class Reponse
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['get_Reponse'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['get_Reponse'])]
     private ?string $texte = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups(['get_Reponse'])]
     private ?\DateTimeInterface $ecriteDate = null;
 
     #[ORM\ManyToOne]
@@ -41,6 +45,7 @@ class Reponse
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['get_Reponse'])]
     private ?Question $question = null;
 
     public function getId(): ?int
