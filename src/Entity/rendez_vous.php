@@ -4,6 +4,9 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
+use App\Controller\CreateRendezVousController;
 use App\Controller\RendezVousController;
 use App\Repository\RendezVousRepository;
 use Doctrine\DBAL\Types\Types;
@@ -11,10 +14,15 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RendezVousRepository::class)]
 #[ApiResource(operations: [
-    new Get(
-        uriTemplate: '/rendez_vous/semaine',
+    new Post(),
+//    new Post(
+//        name: 'create',
+//        uriTemplate: '/rendez_vouses',
+//        controller: CreateRendezVousController::class
+//    ),
+    new GetCollection(
+        uriTemplate: '/rendez_vouse/semaine/{id}',
         controller: RendezVousController::class,
-        name: 'app_rendezvous_semaine'
     ),
 ])]
 class rendez_vous
