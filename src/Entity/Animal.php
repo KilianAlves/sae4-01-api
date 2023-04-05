@@ -3,47 +3,82 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
 use App\Repository\AnimalRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: AnimalRepository::class)]
-#[ApiResource]
+#[ApiResource(operations: [
+    new Get(),
+    new GetCollection(
+        normalizationContext: ['groups' => ['get_Animal']], ),
+    new Put(
+        normalizationContext: ['groups' => ['get_Animal']],
+        denormalizationContext: ['groups' => ['set_Animal']],
+    ),
+    new Patch(
+        normalizationContext: ['groups' => ['get_Animal']],
+        denormalizationContext: ['groups' => ['set_Animal']],
+    ),
+    new Post(
+        normalizationContext: ['groups' => ['get_Animal']],
+        denormalizationContext: ['groups' => ['set_Animal']],
+    ),
+],
+    normalizationContext: ['groups' => ['get_Animal']],
+    security: "is_granted('ROLE_VETERINAIRE')")]
 class Animal
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['get_Animal'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[Groups(['get_Animal', 'set_Animal'])]
     private ?string $nom = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups(['get_Animal', 'set_Animal'])]
     private ?\DateTimeInterface $dateNaissance = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    #[Groups(['get_Animal', 'set_Animal'])]
     private ?\DateTimeInterface $dateDeces = null;
 
     #[ORM\Column(length: 50)]
+    #[Groups(['get_Animal', 'set_Animal'])]
     private ?string $robe = null;
 
     #[ORM\Column(length: 50)]
+    #[Groups(['get_Animal', 'set_Animal'])]
     private ?string $numPuce = null;
 
     #[ORM\Column(length: 256)]
+    #[Groups(['get_Animal', 'set_Animal'])]
     private ?string $commentaire = null;
 
     #[ORM\Column]
+    #[Groups(['get_Animal', 'set_Animal'])]
     private ?float $poids = null;
 
     #[ORM\Column(length: 50)]
+    #[Groups(['get_Animal', 'set_Animal'])]
     private ?string $numTatouage = null;
 
     #[ORM\Column]
+    #[Groups(['get_Animal', 'set_Animal'])]
     private ?int $aDisparu = null;
 
     #[ORM\Column]
+    #[Groups(['get_Animal', 'set_Animal'])]
     private ?int $estAgressif = null;
 
     public function getId(): ?int
@@ -167,6 +202,18 @@ class Animal
     public function setEstAgressif(int $estAgressif): self
     {
         $this->estAgressif = $estAgressif;
+
+        return $this;
+    }
+
+    public function getUtilisateur(): ?Utilisateur
+    {
+        return $this->utilisateur;
+    }
+
+    public function setUtilisateur(?Utilisateur $utilisateur): self
+    {
+        $this->utilisateur = $utilisateur;
 
         return $this;
     }
