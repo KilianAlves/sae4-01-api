@@ -5,44 +5,53 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
-use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
-use ApiPlatform\Metadata\Put;
 use App\Repository\QuestionRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: QuestionRepository::class)]
 #[ApiResource(
     operations: [
         new GetCollection(),
         new Get(
-            normalizationContext: ['groups' => ['get_Question']]
+            normalizationContext: ['groups' => ['get_Question', 'get_Reponse']]
         ),
         new Post(
             security: "is_granted('ROLE_USER') and object == user"
         ),
-    ]
+    ],
+    normalizationContext: ['groups' => ['get_Question', 'get_Reponse']]
 )]
 class Question
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['get_Question'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['get_Question'])]
     private ?string $titre = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['get_Question'])]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups(['get_Question'])]
     private ?\DateTimeInterface $dateEcriture = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['get_Question'])]
     private ?Utilisateur $utilisateur = null;
+
+    #[ORM\OneToMany(mappedBy: 'question', targetEntity: Reponse::class)]
+    #[Groups(['get_Question'])]
+    private $reponses;
 
     public function getId(): ?int
     {
