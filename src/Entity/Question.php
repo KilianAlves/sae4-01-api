@@ -16,10 +16,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
     operations: [
         new GetCollection(),
         new Get(
-            normalizationContext: ['groups' => ['get_Question', 'get_Reponse']]
+            normalizationContext: ['groups' => ['get_Question']]
         ),
         new Post(
-            security: "is_granted('ROLE_USER') and object == user"
+            normalizationContext: ['groups' => ['get_Question']],
+            denormalizationContext: ['groups' => ['set_Question']],
+            security: "is_granted('IS_AUTHENTICATED_FULLY')"
         ),
     ],
     normalizationContext: ['groups' => ['get_Question', 'get_Reponse']]
@@ -33,20 +35,20 @@ class Question
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['get_Question'])]
+    #[Groups(['get_Question', 'set_Question'])]
     private ?string $titre = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['get_Question'])]
+    #[Groups(['get_Question', 'set_Question'])]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    #[Groups(['get_Question'])]
+    #[Groups(['get_Question', 'set_Question'])]
     private ?\DateTimeInterface $dateEcriture = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['get_Question'])]
+    #[Groups(['get_Question', 'set_Question'])]
     private ?Utilisateur $utilisateur = null;
 
     #[ORM\OneToMany(mappedBy: 'question', targetEntity: Reponse::class)]
