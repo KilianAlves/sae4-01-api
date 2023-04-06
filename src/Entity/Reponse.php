@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
@@ -19,10 +21,13 @@ use Symfony\Component\Serializer\Annotation\Groups;
             normalizationContext: ['groups' => ['get_Reponse']]
         ),
         new Post(
-            security: "is_granted('ROLE_USER') and object == user"
+            normalizationContext: ['groups' => ['get_Reponse']],
+            denormalizationContext: ['groups' => ['set_Reponse']],
+            security: "is_granted('IS_AUTHENTICATED_FULLY')"
         ),
     ]
 )]
+#[ApiFilter(SearchFilter::class, properties: ['question' => 'exact'])]
 class Reponse
 {
     #[ORM\Id]
@@ -32,20 +37,21 @@ class Reponse
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['get_Reponse'])]
+    #[Groups(['get_Reponse', 'set_Reponse'])]
     private ?string $texte = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    #[Groups(['get_Reponse'])]
+    #[Groups(['get_Reponse', 'set_Reponse'])]
     private ?\DateTimeInterface $ecriteDate = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['get_Reponse', 'set_Reponse'])]
     private ?Utilisateur $utilisateur = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['get_Reponse'])]
+    #[Groups(['get_Reponse', 'set_Reponse'])]
     private ?Question $question = null;
 
     public function getId(): ?int
