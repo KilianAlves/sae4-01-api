@@ -4,6 +4,8 @@ namespace App\Controller\Admin;
 
 use App\Entity\Creneau;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 
 class CreneauCrudController extends AbstractCrudController
 {
@@ -12,14 +14,12 @@ class CreneauCrudController extends AbstractCrudController
         return Creneau::class;
     }
 
-    /*
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
+            IdField::new('id')->hideOnForm(),
+            NumberField::new('debut'),
+            NumberField::new('fin'),
         ];
     }
-    */
 }
