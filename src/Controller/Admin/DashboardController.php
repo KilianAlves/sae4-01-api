@@ -6,6 +6,7 @@ use App\Entity\Animal;
 use App\Entity\Client;
 use App\Entity\Creneau;
 use App\Entity\Question;
+use App\Entity\Race;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -34,5 +35,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Client', 'fas fa-circle-user', Client::class);
         yield MenuItem::linkToCrud('Créneau', 'fas fa-calendar-days', Creneau::class);
         yield MenuItem::linkToCrud('Question', 'fas fa-calendar-days', Question::class);
+        yield MenuItem::linkToCrud('Race', 'fas fa-cat', Race::class);
     }
 }
