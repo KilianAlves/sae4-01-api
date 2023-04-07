@@ -7,6 +7,11 @@ use App\Entity\Client;
 use App\Entity\Creneau;
 use App\Entity\Question;
 use App\Entity\Race;
+use App\Entity\rendez_vous;
+use App\Entity\Reponse;
+use App\Entity\Utilisateur;
+use App\Entity\Vaccin;
+use App\Entity\Veterinaire;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -36,5 +41,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Créneau', 'fas fa-calendar-days', Creneau::class);
         yield MenuItem::linkToCrud('Question', 'fas fa-calendar-days', Question::class);
         yield MenuItem::linkToCrud('Race', 'fas fa-cat', Race::class);
+        yield MenuItem::linkToCrud('rendezvous', 'fas fa-calendar-check', rendez_vous::class);
     }
 }
