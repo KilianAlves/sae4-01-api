@@ -33,5 +33,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Animal', 'fas fa-paw', Animal::class);
         yield MenuItem::linkToCrud('Client', 'fas fa-circle-user', Client::class);
         yield MenuItem::linkToCrud('Créneau', 'fas fa-calendar-days', Creneau::class);
+        yield MenuItem::linkToCrud('Question', 'fas fa-calendar-days', Question::class);
     }
 }
