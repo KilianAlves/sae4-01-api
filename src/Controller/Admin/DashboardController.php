@@ -39,10 +39,10 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Animal', 'fas fa-paw', Animal::class);
         yield MenuItem::linkToCrud('Client', 'fas fa-circle-user', Client::class);
         yield MenuItem::linkToCrud('Créneau', 'fas fa-calendar-days', Creneau::class);
-        yield MenuItem::linkToCrud('Question', 'fas fa-calendar-days', Question::class);
+        yield MenuItem::linkToCrud('Question', 'fas fa-question', Question::class);
         yield MenuItem::linkToCrud('Race', 'fas fa-cat', Race::class);
         yield MenuItem::linkToCrud('rendezvous', 'fas fa-calendar-check', rendez_vous::class);
-        yield MenuItem::linkToCrud('Réponse', 'fas fa-cat', Reponse::class);
+        yield MenuItem::linkToCrud('Réponse', 'fas fa-message', Reponse::class);
         yield MenuItem::linkToCrud('Utilisateur', 'fas fa-user-pen', Utilisateur::class);
         yield MenuItem::linkToCrud('Vaccin', 'fas fa-syringe', Vaccin::class);
         yield MenuItem::linkToCrud('Veterinaire', 'fas fa-user-nurse', Veterinaire::class);
