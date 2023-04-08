@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 #[AsController]
 class RendezVousController extends AbstractController
 {
-    public function __construct(RendezVousRepository $repository, VeterianireRepository $veterianireRepository)
+    public function __construct(RendezVousRepository $repository)
     {
         $this->repository = $repository;
     }
