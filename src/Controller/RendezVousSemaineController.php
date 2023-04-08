@@ -26,8 +26,8 @@ class RendezVousSemaineController extends AbstractController
     public function __invoke(int $id, Request $request): JsonResponse
     {
 
-        //$date = $request->query->get('date') ? DateTime::createFromFormat("Y-m-d", $request->query->get('date')) : new \DateTime('today');
-        $date = new \DateTime('today');
+        $date = $request->query->get('date') ? new \DateTime($request->query->get('date')) : new \DateTime('today');
+        //$date = new \DateTime('today');
         $veterinaire = $this->veterianireRepository->find($id);
         $rdv = $this->repository->findBySemaineAndVeterinaire($date, $veterinaire);
         $listeRDV = [];
