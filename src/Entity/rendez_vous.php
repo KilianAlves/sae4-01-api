@@ -14,12 +14,11 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RendezVousRepository::class)]
 #[ApiResource(operations: [
-    new Post(),
-//    new Post(
-//        name: 'create',
-//        uriTemplate: '/rendez_vouses',
-//        controller: CreateRendezVousController::class
-//    ),
+    new Post(
+        name: 'create',
+        uriTemplate: '/rendez_vouses',
+        controller: CreateRendezVousController::class
+    ),
     new GetCollection(
         uriTemplate: '/rendez_vouse/semaine/{id}',
         controller: RendezVousController::class,

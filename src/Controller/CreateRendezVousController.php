@@ -4,12 +4,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Client;
 use App\Entity\rendez_vous;
 use App\Entity\Veterinaire;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpKernel\Attribute\AsController;
-
 
 class CreateRendezVousController extends AbstractController
 {
@@ -20,12 +17,16 @@ class CreateRendezVousController extends AbstractController
     public function __invoke(rendez_vous $rendez_vous): rendez_vous
     {
         $user = $this->getUser();
-        if ($user instanceof Client) {
+        if (in_array('ROLE_CLIENT', $user->getRoles(), true)) {
             $rendez_vous->setClient($user);
-        } elseif ($user instanceof Veterinaire) {
+        } elseif (in_array('ROLE_VETERINAIRE', $user->getRoles(), true)) {
             $rendez_vous->setVeterinaire($user);
         }
-        var_dump($user->getId());
+
+        $rendez_vous->setCommentaireVeto("");
+        $rendez_vous->setEstDomicile(0);
+        $rendez_vous->setEstUrgent(0);
+
         return $rendez_vous;
     }
 }
