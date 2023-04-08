@@ -34,7 +34,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
 ],
     normalizationContext: ['groups' => ['get_Creneau']],
     security: "is_granted('ROLE_VETERINAIRE')")]
-
 class Creneau
 {
     #[ORM\Id]

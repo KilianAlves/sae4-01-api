@@ -8,8 +8,6 @@ use App\Entity\Client;
 use App\Entity\rendez_vous;
 use App\Entity\Veterinaire;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpKernel\Attribute\AsController;
-
 
 class CreateRendezVousController extends AbstractController
 {
@@ -26,6 +24,7 @@ class CreateRendezVousController extends AbstractController
             $rendez_vous->setVeterinaire($user);
         }
         var_dump($user->getId());
+
         return $rendez_vous;
     }
 }

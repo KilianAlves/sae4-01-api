@@ -2,17 +2,13 @@
 
 namespace App\Controller;
 
-use App\Entity\Veterinaire;
 use App\Repository\RendezVousRepository;
 use App\Repository\VeterianireRepository;
 use DateTime;
-use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Attribute\AsController;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Attribute\AsController;
 
 #[AsController]
 class RendezVousController extends AbstractController
@@ -25,8 +21,7 @@ class RendezVousController extends AbstractController
 
     public function __invoke(int $id, Request $request): JsonResponse
     {
-
-        //$date = $request->query->get('date') ? DateTime::createFromFormat("Y-m-d", $request->query->get('date')) : new \DateTime('today');
+        // $date = $request->query->get('date') ? DateTime::createFromFormat("Y-m-d", $request->query->get('date')) : new \DateTime('today');
         $date = new \DateTime('today');
         $veterinaire = $this->veterianireRepository->find($id);
         $rdv = $this->repository->findBySemaineAndVeterinaire($date, $veterinaire);
@@ -43,7 +38,7 @@ class RendezVousController extends AbstractController
             $index = $r->getDateRdv()->format('d-m-Y');
             unset($listeRDV[$index][$r->getHoraire()]);
         }
+
         return new JsonResponse($listeRDV);
     }
-
 }
