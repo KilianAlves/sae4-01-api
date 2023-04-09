@@ -11,21 +11,21 @@ use Zenstruck\Foundry\RepositoryProxy;
 /**
  * @extends ModelFactory<Creneau>
  *
- * @method        Creneau|Proxy create(array|callable $attributes = [])
- * @method static Creneau|Proxy createOne(array $attributes = [])
- * @method static Creneau|Proxy find(object|array|mixed $criteria)
- * @method static Creneau|Proxy findOrCreate(array $attributes)
- * @method static Creneau|Proxy first(string $sortedField = 'id')
- * @method static Creneau|Proxy last(string $sortedField = 'id')
- * @method static Creneau|Proxy random(array $attributes = [])
- * @method static Creneau|Proxy randomOrCreate(array $attributes = [])
+ * @method        Creneau|Proxy                     create(array|callable $attributes = [])
+ * @method static Creneau|Proxy                     createOne(array $attributes = [])
+ * @method static Creneau|Proxy                     find(object|array|mixed $criteria)
+ * @method static Creneau|Proxy                     findOrCreate(array $attributes)
+ * @method static Creneau|Proxy                     first(string $sortedField = 'id')
+ * @method static Creneau|Proxy                     last(string $sortedField = 'id')
+ * @method static Creneau|Proxy                     random(array $attributes = [])
+ * @method static Creneau|Proxy                     randomOrCreate(array $attributes = [])
  * @method static CreneauRepository|RepositoryProxy repository()
- * @method static Creneau[]|Proxy[] all()
- * @method static Creneau[]|Proxy[] createMany(int $number, array|callable $attributes = [])
- * @method static Creneau[]|Proxy[] createSequence(iterable|callable $sequence)
- * @method static Creneau[]|Proxy[] findBy(array $attributes)
- * @method static Creneau[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
- * @method static Creneau[]|Proxy[] randomSet(int $number, array $attributes = [])
+ * @method static Creneau[]|Proxy[]                 all()
+ * @method static Creneau[]|Proxy[]                 createMany(int $number, array|callable $attributes = [])
+ * @method static Creneau[]|Proxy[]                 createSequence(iterable|callable $sequence)
+ * @method static Creneau[]|Proxy[]                 findBy(array $attributes)
+ * @method static Creneau[]|Proxy[]                 randomRange(int $min, int $max, array $attributes = [])
+ * @method static Creneau[]|Proxy[]                 randomSet(int $number, array $attributes = [])
  */
 final class CreneauFactory extends ModelFactory
 {

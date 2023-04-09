@@ -13,6 +13,6 @@ class AnimalFixtures extends Fixture
         // $product = new Product();
         // $manager->persist($product);
         AnimalFactory::createMany(20);
-        //$manager->flush();
+        // $manager->flush();
     }
 }

@@ -8,13 +8,10 @@ use App\Entity\Veterinaire;
 use App\Repository\RendezVousRepository;
 use App\Repository\VeterianireRepository;
 use DateTime;
-use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Attribute\AsController;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Attribute\AsController;
 
 #[AsController]
 class RendezVousController extends AbstractController
@@ -36,5 +33,4 @@ class RendezVousController extends AbstractController
         }
         return $this->repository->findBy($criteria);
     }
-
 }

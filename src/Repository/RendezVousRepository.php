@@ -45,10 +45,10 @@ class RendezVousRepository extends ServiceEntityRepository
      */
     public function findBySemaineAndVeterinaire(\DateTimeInterface $dateDebut, Veterinaire $veto): array
     {
-        $dateFin = (new \DateTime("today"))->modify('+6 day');
+        $dateFin = (new \DateTime('today'))->modify('+6 day');
 
         return $this->createQueryBuilder('r')
-            //->select('count(r)')
+            // ->select('count(r)')
             ->andWhere('r.dateRdv BETWEEN :from AND :to')
             ->andWhere('r.veterinaire = :veto')
             ->setParameter('from', $dateDebut)
@@ -58,7 +58,7 @@ class RendezVousRepository extends ServiceEntityRepository
             ->addOrderBy('r.horaire', 'ASC')
             ->getQuery()
             ->getResult()
-            ;
+        ;
     }
 
 //    /**

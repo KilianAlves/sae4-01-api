@@ -11,21 +11,21 @@ use Zenstruck\Foundry\RepositoryProxy;
 /**
  * @extends ModelFactory<Reponse>
  *
- * @method        Reponse|Proxy create(array|callable $attributes = [])
- * @method static Reponse|Proxy createOne(array $attributes = [])
- * @method static Reponse|Proxy find(object|array|mixed $criteria)
- * @method static Reponse|Proxy findOrCreate(array $attributes)
- * @method static Reponse|Proxy first(string $sortedField = 'id')
- * @method static Reponse|Proxy last(string $sortedField = 'id')
- * @method static Reponse|Proxy random(array $attributes = [])
- * @method static Reponse|Proxy randomOrCreate(array $attributes = [])
+ * @method        Reponse|Proxy                     create(array|callable $attributes = [])
+ * @method static Reponse|Proxy                     createOne(array $attributes = [])
+ * @method static Reponse|Proxy                     find(object|array|mixed $criteria)
+ * @method static Reponse|Proxy                     findOrCreate(array $attributes)
+ * @method static Reponse|Proxy                     first(string $sortedField = 'id')
+ * @method static Reponse|Proxy                     last(string $sortedField = 'id')
+ * @method static Reponse|Proxy                     random(array $attributes = [])
+ * @method static Reponse|Proxy                     randomOrCreate(array $attributes = [])
  * @method static ReponseRepository|RepositoryProxy repository()
- * @method static Reponse[]|Proxy[] all()
- * @method static Reponse[]|Proxy[] createMany(int $number, array|callable $attributes = [])
- * @method static Reponse[]|Proxy[] createSequence(iterable|callable $sequence)
- * @method static Reponse[]|Proxy[] findBy(array $attributes)
- * @method static Reponse[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
- * @method static Reponse[]|Proxy[] randomSet(int $number, array $attributes = [])
+ * @method static Reponse[]|Proxy[]                 all()
+ * @method static Reponse[]|Proxy[]                 createMany(int $number, array|callable $attributes = [])
+ * @method static Reponse[]|Proxy[]                 createSequence(iterable|callable $sequence)
+ * @method static Reponse[]|Proxy[]                 findBy(array $attributes)
+ * @method static Reponse[]|Proxy[]                 randomRange(int $min, int $max, array $attributes = [])
+ * @method static Reponse[]|Proxy[]                 randomSet(int $number, array $attributes = [])
  */
 final class ReponseFactory extends ModelFactory
 {

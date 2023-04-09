@@ -50,13 +50,14 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 
         // For example:
         return new RedirectResponse($this->urlGenerator->generate('api_entrypoint'));
-        //throw new \Exception('ODO: provide a valid redirect inside '.__FILE__);
+        // throw new \Exception('ODO: provide a valid redirect inside '.__FILE__);
     }
 
     protected function getLoginUrl(Request $request): string
     {
         return $this->urlGenerator->generate(self::LOGIN_ROUTE);
     }
+
     public function start(Request $request, AuthenticationException $authException = null): RedirectResponse
     {
         /** @var string $route current route */
