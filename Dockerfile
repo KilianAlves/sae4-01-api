@@ -34,8 +34,6 @@ RUN composer install \
     --no-interaction \
     --prefer-dist
 
-RUN composer run db
-
 EXPOSE 8000
 
 ENTRYPOINT ["symfony" ,"serve"]
