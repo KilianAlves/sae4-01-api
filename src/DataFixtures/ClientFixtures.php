@@ -12,5 +12,16 @@ class ClientFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         ClientFactory::createMany(10);
+
+        ClientFactory::createOne(['adresse' => 'Rue',
+            'civilite' => 'Francais',
+            'complementAdresse' => 'maison',
+            'email' => 'testClient@gmail.com',
+            'nom' => 'test',
+            'password' => 'test',
+            'prenom' => 'test',
+            'tel' => '0615873216',
+            'ville' => 'Reims',
+        ]);
     }
 }
