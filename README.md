@@ -14,8 +14,18 @@ pour lancer les services du projet via docker il suffit de faire cette commande 
 ```
 docker-compose up
 ```
+Les dossiers de l'ihm et de l'api doivent avoir le même parent, et ils doivent être nommés comme sur le git.
+
+### Back Office :
+
+Pour accéder au back-office utilisez la route "/admin"
 
 ### identifiant de tests : 
 
-email : test@gmail.com
+Vétérinaire: <br>
+email : test@gmail.com <br>
+mot de passe : test
+
+Client: <br>
+email : testClient@gmail.com <br>
 mot de passe : test
