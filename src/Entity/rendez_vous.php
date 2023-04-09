@@ -3,58 +3,78 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
 use App\Controller\CreateRendezVousController;
 use App\Controller\RendezVousController;
+use App\Controller\RendezVousSemaineController;
 use App\Repository\RendezVousRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: RendezVousRepository::class)]
 #[ApiResource(operations: [
-    new Post(),
-//    new Post(
-//        name: 'create',
-//        uriTemplate: '/rendez_vouses',
-//        controller: CreateRendezVousController::class
-//    ),
+    new Post(
+        name: 'create',
+        uriTemplate: '/rendez_vouses',
+        controller: CreateRendezVousController::class
+    ),
     new GetCollection(
         uriTemplate: '/rendez_vouse/semaine/{id}',
-        controller: RendezVousController::class,
+        controller: RendezVousSemaineController::class,
     ),
+    new GetCollection(
+        uriTemplate: '/rendez_vouses',
+        controller: RendezVousController::class,
+        normalizationContext: ['groups' => ['get_Rdv']]
+    ),
+    new Delete(
+        security: "object.getClient() == user || object.getVeterinaire() == user"
+    )
 ])]
 class rendez_vous
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['get_Rdv'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[Groups(['get_Rdv'])]
     private ?string $motif = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups(['get_Rdv'])]
     private ?\DateTimeInterface $dateRdv = null;
 
     #[ORM\Column]
+    #[Groups(['get_Rdv'])]
     private ?int $estUrgent = null;
 
     #[ORM\Column(length: 50)]
+    #[Groups(['get_Rdv'])]
     private ?string $commentaireVeto = null;
 
     #[ORM\Column]
+    #[Groups(['get_Rdv'])]
     private ?int $estDomicile = null;
 
     #[ORM\ManyToOne(inversedBy: 'rendezVous')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['get_Rdv'])]
     private ?Client $client = null;
 
     #[ORM\ManyToOne(inversedBy: 'rendezVous')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['get_Rdv'])]
     private ?Veterinaire $veterinaire = null;
 
     #[ORM\Column]
+    #[Groups(['get_Rdv'])]
     private ?int $horaire = null;
 
     public function getId(): ?int

@@ -69,7 +69,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['get_User'])]
+    #[Groups(['get_User', 'get_Rdv'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
@@ -91,14 +91,14 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 50)]
-    #[Groups(['get_User', 'set_User'])]
+    #[Groups(['get_User', 'set_User', 'get_Rdv'])]
     #[Assert\Regex(
         pattern: '/[<>&"]/',
         match: false)]
     private ?string $nom = null;
 
     #[ORM\Column(length: 50)]
-    #[Groups(['get_User', 'set_User'])]
+    #[Groups(['get_User', 'set_User', 'get_Rdv'])]
     #[Assert\Regex(
         pattern: '/[<>&"]/',
         match: false)]
