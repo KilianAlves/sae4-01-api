@@ -25,5 +25,17 @@ class VeterinaireFixtures extends Fixture
             'tel' => '0615873215',
             'ville' => 'Reims',
         ]);
+
+        VeterinaireFactory::createOne(['adresse' => 'Rue',
+            'civilite' => 'Francais',
+            'complementAdresse' => 'maison',
+            'email' => 'test@gmail.com',
+            'nom' => 'test',
+            'password' => 'test',
+            'prenom' => 'test',
+            'roles' => ['1'],
+            'tel' => '0615873216',
+            'ville' => 'Reims',
+        ]);
     }
 }
