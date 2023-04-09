@@ -10,7 +10,6 @@ services:
       - sql-net
     depends_on:
       - db
-
   db:
     image: mysql:8.0.23
     restart: always
@@ -23,7 +22,6 @@ services:
       - db-data:/var/lib/mysql
     networks:
       - sql-net
-
   phpmyadmin:
     image: phpmyadmin
     restart: always
@@ -35,8 +33,16 @@ services:
       PMA_HOST: db
     networks:
       - sql-net
+  react:
+    build:
+      context: ../sae4-01-front
+    depends_on:
+      - api
+    ports:
+      - 5173:5173
+    networks:
+      - sql-net
 volumes:
   db-data:
-
 networks:
   sql-net:
